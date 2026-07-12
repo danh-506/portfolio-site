@@ -2,9 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Experimental Tags</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experimental Tags | Danny Huynh's Portfolio</title>
 </head>
 <body>
+<header>
+    <h1>Experimental Tags</h1>
+    <nav>
+        <ul>
+            <li><a href="home-page.html">Home</a></li>
+            <li><a href="portfolio-hub.html">Portfolio</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
 
+<main>
+    <h2>Exploring Additional HTML Elements</h2>
+
+    <section>
+        <h3>Template</h3>
+        <p>The content below lives inside a &lt;template&gt; tag. It is not rendered on the page unless cloned and inserted via JavaScript, which we are not doing here per the no-JS rule.</p>
+        <template id="card-template">
+            <article>
+                <h4>Sample Card Title</h4>
+                <p>Sample card content, defined in a template and not shown until cloned.</p>
+            </article>
+        </template>
+    </section>
+
+    <section>
+        <h3>Audio</h3>
+        <p>A short audio clip with fallback source formats:</p>
+        <audio controls>
+            <source src="media/sample-audio.mp3" type="audio/mpeg">
+            <source src="media/sample-audio.ogg" type="audio/ogg">
+            Your browser does not support the audio element.
+        </audio>
+    </section>
+
+    <section>
+        <h3>Video</h3>
+        <p>A short video clip with fallback source formats:</p>
+        <video controls width="400">
+            <source src="media/sample-video.mp4" type="video/mp4">
+            <source src="media/sample-video.webm" type="video/webm">
+            Your browser does not support the video element.
+        </video>
+    </section>
+
+    <section>
+        <h3>Canvas</h3>
+        <p>A canvas element with a minor amount of JavaScript (under 15 lines) to draw a simple shape:</p>
+        <canvas id="demo-canvas" width="300" height="150"></canvas>
+        <script>
+            const canvas = document.getElementById('demo-canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = 'black';
+            ctx.fillRect(20, 20, 100, 60);
+            ctx.strokeStyle = 'black';
+            ctx.beginPath();
+            ctx.arc(220, 75, 40, 0, Math.PI * 2);
+            ctx.stroke();
+        </script>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2026 Danny Huynh</p>
+</footer>
 </body>
 </html>
