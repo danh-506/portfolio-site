@@ -17,6 +17,7 @@
                 <li><a href="home-page.html">Home</a></li>
                 <li><a href="portfolio-hub.html">Portfolio</a></li>
                 <li><a href="resume.html">Resume</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -54,7 +55,25 @@
                 determines its success and value.
             </p>
         </section>
+
+        <hello-console></hello-console>
+
+        <script>
+            // Custom Element #2: logs a message to the console, does not modify the DOM
+            customElements.define('hello-console', class extends HTMLElement {
+                connectedCallback() {
+                    console.log("Hello World!");
+                }
+            });
+        </script>
+        <noscript>
+            <p>This site functions without JavaScript enabled.</p>
+        </noscript>
+
     </main>
+
+
+
 
     <footer>
         <p>&copy; 2026 Danny Huynh</p>
