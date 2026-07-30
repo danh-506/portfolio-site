@@ -1,0 +1,56 @@
+@layer layout{
+    body {
+      display: grid;
+      grid-template-areas:
+        "header"
+        "nav"
+        "main"
+        "footer";
+      grid-template-rows: auto auto 1fr auto;
+
+      > header {
+        grid-area: header;
+        padding: var(--space-2) var(--space-3);
+        border-block-end: var(--border);
+        background: var(--surface);
+      }
+
+      > nav {
+        grid-area: nav;
+        padding: var(--space-2);
+        border-inline-end: var(--border);
+        background: var(--panel);
+
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+      }
+
+      > main {
+        grid-area: main;
+        padding: var(--space-3);
+      }
+
+      > footer {
+        grid-area: footer;
+        padding: var(--space-2) var(--space-3);
+        border-block-start: var(--border);
+        background: var(--surface);
+      }
+
+      github-activity[data-state="loading"] .github-activity__status {
+        font-style: italic;
+      }
+
+      github-activity[data-state="error"] .github-activity__fallback {
+        border: var(--border);
+        padding: var(--space-2);
+      }
+
+      github-activity .github-activity__item {
+        margin-block-end: var(--space-1);
+      }
+    } 
+}
