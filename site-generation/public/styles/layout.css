@@ -39,7 +39,7 @@
         border-block-start: var(--border);
         background: var(--surface);
       }
-
+      
       github-activity[data-state="loading"] .github-activity__status {
         font-style: italic;
       }

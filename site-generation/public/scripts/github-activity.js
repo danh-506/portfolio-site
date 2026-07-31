@@ -30,10 +30,11 @@ function capitalize(word) {
 
 function describeEvent(event) {
   switch (event.type) {
-    case "PushEvent": {
-      const n = event.payload?.commits?.length ?? 0;
-      return `Pushed ${n} commit${n === 1 ? "" : "s"} to`;
-    }
+    case "PushEvent":
+      // GitHub's Events API no longer reliably returns commit counts for
+      // push events (payload.size/commits were trimmed in their 2025
+      // payload-size changes), so we just name the action without a count.
+      return "Pushed to";
     case "CreateEvent":
       return event.payload?.ref_type === "repository"
         ? "Created repository"
@@ -80,6 +81,12 @@ class GitHubActivity extends HTMLElement {
   #status = null;
   #list = null;
   #retryButton = null;
+  // For attributes already present in markup (e.g. username="danh-506"),
+  // the browser calls attributeChangedCallback during element upgrade —
+  // before connectedCallback runs — even though isConnected is already
+  // true by then. This flag distinguishes "DOM is actually built" from
+  // "element is in the document", so #load() never runs against null refs.
+  #initialized = false;
 
   connectedCallback() {
     // Move the authored fallback content (already sitting in the light
@@ -101,6 +108,7 @@ class GitHubActivity extends HTMLElement {
     this.#fallback = fallback;
     this.#status = status;
     this.#list = list;
+    this.#initialized = true;
 
     this.#load();
   }
@@ -110,7 +118,7 @@ class GitHubActivity extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if (oldValue === newValue || !this.isConnected) return;
+    if (oldValue === newValue || !this.#initialized) return;
     this.#load();
   }
 

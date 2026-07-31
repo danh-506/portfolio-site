@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/Layout.astro';
+---
+
+<BaseLayout title="Home">
+  <h1>Danny Huynh's Portfolio Website</h1>
+  <p>By Danny Huynh. Last Updated: July 13, 2026</p>
+  <svg width="150" height="150" viewBox="0 0 150 150">
+    <clipPath id="circleFrame">
+      <circle cx="75" cy="75" r="70" />
+    </clipPath>
+    <image href="/images/DHSecondHeadshot.jpg" x="0" y="0" width="150" height="150" clip-path="url(#circleFrame)" />
+    <circle cx="75" cy="75" r="70" fill="none" stroke="black" stroke-width="3" />
+  </svg>
+  <br/>
+  <section>
+    <h2>Welcome</h2>
+    <p>
+      This is the home page of my <i>portfolio / resume</i> site.
+      The purpose of this site is to provide a summary of my accomplishments and projects
+      that I have been working on. This site will illustrate my interest in a variety of
+      fields in <em>Computer Science / Technology</em>. This site will also demonstrate my literacy
+      and progression in web development.
+    </p>
+  </section>
+
+  <section>
+    <h2>About</h2>
+    <p>
+      I am <strong>Danny Huynh</strong> a student enrolled in <em>University of California, San Diego</em> currently
+      studying Computer Science. I have interests in technology, mainly with building computers and developing
+      mini programs. My passion in development comes from the joy and satisfaction I receive whenever I
+      have successfully completed a project. I am a hard worker who values passion and quality. I believe that
+      projects always require dedication to complete, where passion fuels that dedication. Quality of a project
+      determines its success and value.
+    </p>
+  </section>
+
+  <hello-console></hello-console>
+  <script>
+    customElements.define('hello-console', class extends HTMLElement {
+      connectedCallback() {
+        console.log("Hello World!");
+      }
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,23 @@
+---
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/portfolio-hub", label: "Portfolio" },
+  { href: "/resume", label: "Resume" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<header>
+  <h1>Danny Huynh</h1>
+  <nav>
+    <ul>
+      {nav.map((item) => (
+        <li>
+          <a href={item.href} aria-current={Astro.url.pathname === item.href ? "page" : undefined}>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
