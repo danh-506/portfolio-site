@@ -35,13 +35,4 @@ import BaseLayout from '../layouts/Layout.astro';
       determines its success and value.
     </p>
   </section>
-
-  <hello-console></hello-console>
-  <script>
-    customElements.define('hello-console', class extends HTMLElement {
-      connectedCallback() {
-        console.log("Hello World!");
-      }
-    });
-  </script>
 </BaseLayout>
