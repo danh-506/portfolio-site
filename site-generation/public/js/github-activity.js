@@ -1,17 +1,5 @@
-// <github-activity username="..." count="..."></github-activity>
-//
-// Fetches recent public GitHub events for a user and renders them as a
-// list. Falls back to whatever static content is authored between the
-// element's tags when JavaScript is unavailable or the request fails.
-//
-// Rendering never uses innerHTML on remote data: event descriptions,
-// repo names, and timestamps are all written with textContent onto a
-// cloned <template>, so nothing from the API can inject markup.
-
 const ENDPOINT_BASE = "https://api.github.com/users";
-const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes — avoids hammering the
-                                     // 60/hr unauthenticated rate limit
-                                     // during repeated dev/grading reloads.
+const CACHE_TTL_MS = 5 * 60 * 1000;
 const REQUEST_TIMEOUT_MS = 8000;
 
 const ITEM_TEMPLATE = document.createElement("template");
@@ -31,9 +19,6 @@ function capitalize(word) {
 function describeEvent(event) {
   switch (event.type) {
     case "PushEvent":
-      // GitHub's Events API no longer reliably returns commit counts for
-      // push events (payload.size/commits were trimmed in their 2025
-      // payload-size changes), so we just name the action without a count.
       return "Pushed to";
     case "CreateEvent":
       return event.payload?.ref_type === "repository"
@@ -81,17 +66,9 @@ class GitHubActivity extends HTMLElement {
   #status = null;
   #list = null;
   #retryButton = null;
-  // For attributes already present in markup (e.g. username="danh-506"),
-  // the browser calls attributeChangedCallback during element upgrade —
-  // before connectedCallback runs — even though isConnected is already
-  // true by then. This flag distinguishes "DOM is actually built" from
-  // "element is in the document", so #load() never runs against null refs.
   #initialized = false;
 
   connectedCallback() {
-    // Move the authored fallback content (already sitting in the light
-    // DOM) into its own wrapper instead of discarding it, so it can be
-    // shown again on error without ever touching innerHTML.
     const fallback = document.createElement("div");
     fallback.className = "github-activity__fallback";
     fallback.append(...this.childNodes);

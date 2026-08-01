@@ -1,9 +1,3 @@
-// Progressive enhancement: builds a theme picker control and inserts it
-// into the page. If this script never runs (JS disabled/blocked/fails),
-// no control appears at all — there is nothing inert or misleading left
-// behind, and the CSS prefers-color-scheme baseline in tokens.css still
-// drives light/dark automatically.
-
 const STORAGE_KEY = "theme-preference";
 
 function getStoredTheme() {
@@ -22,8 +16,6 @@ function setStoredTheme(value) {
       localStorage.setItem(STORAGE_KEY, value);
     }
   } catch {
-    // localStorage unavailable — theme still applies for this page load
-    // via applyTheme() below, it just won't persist across reloads.
   }
 }
 
@@ -78,8 +70,6 @@ function buildPicker(current) {
 }
 
 function init() {
-  // "auto" means no explicit choice stored — CSS prefers-color-scheme
-  // baseline governs, and theme-init.js will not have set data-theme.
   const current = getStoredTheme() ?? "auto";
   const picker = buildPicker(current);
 
