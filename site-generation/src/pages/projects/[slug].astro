@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const links = project.data.links ?? [];
+---
+
+<BaseLayout title={project.data.title}>
+  <article>
+    <h2>{project.data.title}</h2>
+
+    <Content />
+
+    {links.length > 0 && (
+      <p>
+        Links:
+        {links.map((link, index) => (
+          <>
+            {' '}
+            <a href={link.url} target="_blank" rel="noopener noreferrer">
+              {link.label}
+            </a>
+            {index < links.length - 1 ? ' |' : ''}
+          </>
+        ))}
+      </p>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  article {
+    max-width: var(--measure);
+    margin-inline: auto;
+  }
+ 
+  article img,
+  article :global(img) {
+    width: 50rem;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-inline: auto;
+  }
+</style>
