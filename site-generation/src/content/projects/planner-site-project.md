@@ -1,7 +1,7 @@
 ---
 title: "Planner Web App Project"
 category: software
-description: "Built in class to practice web development principles and techniques, from information architecture through to a full SSG conversion."
+description: "Built on my own time, a web app which features a calendar function, keeping track of dates, times, and events. Using mainly Javascript to function, the javascript accesses the loclStorage of the browser to save events and manipulates the DOM to allow the user to see the events on the calendar."
 links:
   - label: "GitHub repo"
     url: "https://github.com/danh-506/planner-site-project"
